@@ -12,6 +12,8 @@ set close_on_esc: true
 
 ## Weather 
 ## __________________________________________________________
+
+#$WeatherImage = Image.new("Clear.png", x:100 , y: 100) 
 $weathertick = 0
 api_key = ENV["VISUAL_CROSSING_API_KEY"]
 
@@ -66,10 +68,15 @@ puts "Conditions: #{$current["conditions"]}"
 
 $weatherdegree = Text.new("30°", x: :right , y: :top, padding_right: 15, padding_top:55 , size: 30) 
 
-## fix later
+
 def weatherupdate
-##$img = Image.new('#{$current["conditions"]}.png')
-$weatherdegree.content = "#{$current["temp"]}"
+fahrenheitstr = String("#{$current["temp"]}")
+num_int = fahrenheitstr.to_i
+fahrenheit = Integer("#{num_int}") * 9/5 + 32
+$weatherdegree.content = "#{$current["temp"]}°C | #{fahrenheit}°F"
+#$WeatherImage.path ="#{$current["conditions"]}.png"
+puts "#{$current["conditions"]}.png"
+
 end
 
 ## Time 
@@ -86,7 +93,8 @@ update do
   if tick % 60 == 0
     updatetime
   end
-  if $weathertick % 3600 == 0
+  if $weathertick % 216000 == 0
+      puts "#{$weathertick}"
       weatherupdate
   end
   tick += 1

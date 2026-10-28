@@ -12,6 +12,8 @@ set fps_cap: 60
 set icon: 'icon.png'
 set close_on_esc: true
 
+$Box = Rectangle.new(x: :right, y: :bottom, width: 350, height: 590, fill: false, stroke_width: 3, stroke_color: 'white')
+
 ## Weather 
 ## __________________________________________________________
 
@@ -97,10 +99,11 @@ if OS.windows? == true
 end
 end
 
-def systemresources 
-  text = Text.new('Unknown', x: :right , y: :bottom, padding_right: 250, padding_bottom: 60 , size: 30)
-  text.content = "CPU: \nGPU: \nMem: \nDisk: \nSwp \n"
+$systext = Text.new('Unknown', x: :right , y: :bottom, padding_left: 250, padding_bottom: 60 , size: 30)
 
+def systemresources 
+  $systext.x = ($Box.x + 30)
+  $systext.content = "CPU: \nGPU: \nMem: \nDisk: \nSwp \n"
 end
 ## Time 
 ##___________________________________________________________________________________________________
@@ -108,8 +111,10 @@ $timetext = Text.new('Burhar', x: :right , y: :top, padding_right: 15, padding_t
 tick = 0
 
 def updatetime
-    time = Time.now.asctime
-    $timetext.content = time
+    time = Time.new
+    #time = Time.now.asctime
+    #$timetext.content = time
+    $timetext.content = time.strftime("%Y-%m-%d %H:%M")
 end
 
 $powertick = 0
@@ -129,7 +134,5 @@ update do
   $weathertick += 1
   $powertick += 1
 end
-
-Rectangle.new(x: :right, y: :bottom, width: 350, height: 590, fill: false, stroke_width: 3, stroke_color: 'white')
 
 show

@@ -101,7 +101,6 @@ num_int = fahrenheitstr.to_i
 fahrenheit = Integer("#{num_int}") * 9/5 + 32
 $weatherdegree.content = "#{$current["temp"]}°C | #{fahrenheit}°F"
 $weathericon = Text.new("Unkown", y: 150, size: 50)
-puts Dir.exist?"Fonts"
 Dir.chdir("Fonts")
 # You NEED a Monospace font
 $weathericon.font = "SpaceMono-Regular.ttf"

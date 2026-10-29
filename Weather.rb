@@ -4,7 +4,7 @@ require "net/http"
 require "json"
 require 'os'
 
-set title: 'Weather Aepp'
+set title: 'Weather App'
 set width: 800, height: 600
 set background: 'Black'
 set fps_cap: 60
